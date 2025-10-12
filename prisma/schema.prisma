@@ -1,0 +1,94 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum OrgRole {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+enum Plan {
+  FREE
+  PRO
+  ENTERPRISE
+}
+
+model User {
+  id           String       @id @default(cuid())
+  email        String       @unique
+  password     String
+  name         String?
+  isSuperAdmin Boolean      @default(false)
+  memberships  Membership[]
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  @@map("users")
+}
+
+model Organization {
+  id            String         @id @default(cuid())
+  name          String
+  slug          String         @unique
+  plan          Plan           @default(FREE)
+  memberships   Membership[]
+  subscriptions Subscription[]
+  apiKeys       ApiKey[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@map("organizations")
+}
+
+model Membership {
+  userId         String
+  organizationId String
+  role           OrgRole       @default(MEMBER)
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization   Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  createdAt      DateTime      @default(now())
+
+  @@id([userId, organizationId])
+  @@index([organizationId])
+
+  @@map("memberships")
+}
+
+model Subscription {
+  id                 String       @id @default(cuid())
+  organizationId     String
+  organization       Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  provider           String
+  providerCustomerId String
+  providerSubId      String       @unique
+  status             String
+  plan               Plan
+  currentPeriodEnd   DateTime
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+
+  @@index([organizationId])
+
+  @@map("subscriptions")
+}
+
+model ApiKey {
+  id             String       @id @default(cuid())
+  organizationId String
+  keyHash        String       @unique
+  name           String
+  lastUsedAt     DateTime?
+  createdAt      DateTime     @default(now())
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId])
+
+  @@map("api_keys")
+}
+
