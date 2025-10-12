@@ -19,7 +19,8 @@ services:
     image: postgres:15
     container_name: minara_postgres
     ports:
-      - "5432:5432"
+      # because of another db running on 5432
+      - "5438:5432"
     env_file:
       - .env
     volumes:
