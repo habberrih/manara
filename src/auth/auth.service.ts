@@ -3,7 +3,6 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateLoginDto } from './dto/create-login.dto';
-import { SignUpDto } from './dto/sign-up.dto';
 import * as bcrypt from 'bcryptjs';
 
 @Injectable()
@@ -70,7 +69,8 @@ export class AuthService {
     };
   }
 
-  async signup(dto: SignUpDto) {
+  // Todo: CreateUserDto type when user module is ready
+  async signup(dto: any) {
     // Todo: Implement signup logic after user module is ready
   }
 
