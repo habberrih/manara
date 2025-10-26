@@ -20,75 +20,79 @@ enum Plan {
 }
 
 model User {
-  id           String       @id @default(cuid())
+  id           String       @id @default(uuid())
   email        String       @unique
   password     String
   name         String?
-  isSuperAdmin Boolean      @default(false)
+  isSuperAdmin Boolean      @default(false) @map("is_super_admin")
+  refreshToken String?      @map("refresh_token")
   memberships  Membership[]
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
+  createdAt    DateTime     @default(now()) @map("created_at")
+  updatedAt    DateTime     @updatedAt @map("updated_at")
+  deletedAt    DateTime?    @map("deleted_at")
 
   @@map("users")
 }
 
 model Organization {
-  id            String         @id @default(cuid())
+  id            String         @id @default(uuid())
   name          String
   slug          String         @unique
   plan          Plan           @default(FREE)
   memberships   Membership[]
   subscriptions Subscription[]
   apiKeys       ApiKey[]
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
+  createdAt     DateTime       @default(now()) @map("created_at")
+  updatedAt     DateTime       @updatedAt @map("updated_at")
+  deletedAt     DateTime?      @map("deleted_at")
 
   @@map("organizations")
 }
 
 model Membership {
-  userId         String
-  organizationId String
-  role           OrgRole       @default(MEMBER)
-  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  organization   Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  createdAt      DateTime      @default(now())
+  userId         String       @map("user_id")
+  organizationId String       @map("organization_id")
+  role           OrgRole      @default(MEMBER)
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  createdAt      DateTime     @default(now()) @map("created_at")
+  updatedAt      DateTime     @updatedAt @map("updated_at")
+  deletedAt      DateTime?    @map("deleted_at")
 
   @@id([userId, organizationId])
   @@index([organizationId])
-
   @@map("memberships")
 }
 
 model Subscription {
-  id                 String       @id @default(cuid())
-  organizationId     String
+  id                 String       @id @default(uuid())
+  organizationId     String       @map("organization_id")
   organization       Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   provider           String
-  providerCustomerId String
-  providerSubId      String       @unique
+  providerCustomerId String       @map("provider_customer_id")
+  providerSubId      String       @unique @map("provider_sub_id")
   status             String
   plan               Plan
-  currentPeriodEnd   DateTime
-  createdAt          DateTime     @default(now())
-  updatedAt          DateTime     @updatedAt
+  currentPeriodEnd   DateTime     @map("current_period_end")
+  createdAt          DateTime     @default(now()) @map("created_at")
+  updatedAt          DateTime     @updatedAt @map("updated_at")
+  deletedAt          DateTime?    @map("deleted_at")
 
   @@index([organizationId])
-
   @@map("subscriptions")
 }
 
 model ApiKey {
   id             String       @id @default(cuid())
-  organizationId String
-  keyHash        String       @unique
+  organizationId String       @map("organization_id")
+  keyHash        String       @unique @map("key_hash")
   name           String
-  lastUsedAt     DateTime?
-  createdAt      DateTime     @default(now())
+  lastUsedAt     DateTime?    @map("last_used_at")
+  createdAt      DateTime     @default(now()) @map("created_at")
+  updatedAt      DateTime     @updatedAt @map("updated_at")
+  deletedAt      DateTime?    @map("deleted_at")
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 
   @@index([organizationId])
-
   @@map("api_keys")
 }
-
