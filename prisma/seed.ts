@@ -3,7 +3,7 @@ import * as bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
-const password = bcrypt.hashSync(process.env.USERS_PASSWORD || 'password', 10);
+const password = bcrypt.hashSync('password', 10);
 
 export const userData: Prisma.UserCreateInput[] = [
   {
