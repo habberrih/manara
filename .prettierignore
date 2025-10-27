@@ -1,0 +1,11 @@
+package-lock.json
+dist
+docker
+coverage
+.lintstagedrc
+docker-compose.yaml
+migration.md
+README.md
+.github/
+CHANGELOG.md
+docs/
