@@ -3,6 +3,8 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { CreateUserDto } from 'src/user/dto/create-user.dto';
+import { UsersService } from 'src/user/user.service';
 import { CreateLoginDto } from './dto/create-login.dto';
 
 @Injectable()
@@ -11,6 +13,7 @@ export class AuthService {
     private readonly prismaService: PrismaService,
     private readonly jwt: JwtService,
     private readonly configService: ConfigService,
+    private readonly usersService: UsersService,
   ) {}
 
   async login(loginDto: CreateLoginDto) {
@@ -69,9 +72,19 @@ export class AuthService {
     };
   }
 
-  // Todo: CreateUserDto type when user module is ready
-  async signup(dto: any) {
-    // Todo: Implement signup logic after user module is ready
+  async signup(dto: CreateUserDto) {
+    const user = await this.usersService.createOneUser(dto);
+
+    return {
+      data: {
+        id: user.id,
+        name: dto.name ?? null,
+        email: user.email,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+        deletedAt: user.deletedAt,
+      },
+    };
   }
 
   async logout(userId: string): Promise<void> {
@@ -90,26 +103,26 @@ export class AuthService {
 
   async getJwtAccessToken(userId: string, email: string): Promise<string> {
     // TODO: Extend payload with richer claims (e.g. roles) once requirements are final.
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore because Joi validation will enforce correct values later
     return await this.jwt.signAsync(
       { id: userId, email },
       {
         secret: this.configService.get<string>('JWT_SECRET_KEY'),
-        expiresIn: Number(
-          this.configService.get<string>('JWT_ACCESS_EXPIRES_IN'),
-        ),
+        expiresIn: this.configService.get<string>('JWT_ACCESS_EXPIRES_IN'),
       },
     );
   }
 
   async getJwtRefreshToken(userId: string, email: string) {
     // TODO: Mirror access token payload changes to keep refresh logic in sync.
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore because Joi validation will enforce correct values later
     return await this.jwt.signAsync(
       { id: userId, email },
       {
         secret: this.configService.get<string>('JWT_REFRESH_SECRET_KEY'),
-        expiresIn: Number(
-          this.configService.get<string>('JWT_REFRESH_EXPIRES_IN'),
-        ),
+        expiresIn: this.configService.get<string>('JWT_REFRESH_EXPIRES_IN'),
       },
     );
   }

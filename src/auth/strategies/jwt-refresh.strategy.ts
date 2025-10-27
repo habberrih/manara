@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { Request } from 'express';
 import { ExtractJwt, Strategy } from 'passport-jwt';
+import { UsersService } from 'src/user/user.service';
 
 @Injectable()
 export class JwtRefreshStrategy extends PassportStrategy(
@@ -11,7 +12,7 @@ export class JwtRefreshStrategy extends PassportStrategy(
 ) {
   constructor(
     config: ConfigService,
-    // Todo: inject users service
+    private readonly usersService: UsersService,
   ) {
     const secret = config.get<string>('JWT_REFRESH_SECRET_KEY');
     if (!secret) throw new Error('JWT_REFRESH_SECRET_KEY is not set'); // Todo: remove after env validation
@@ -29,6 +30,9 @@ export class JwtRefreshStrategy extends PassportStrategy(
 
     if (!refreshToken) throw new ForbiddenException('Refresh token malformed');
 
-    // Todo: validate refresh token with users service.
+    return this.usersService.getUserIfRefreshTokenMatch(
+      refreshToken,
+      payload.id,
+    );
   }
 }

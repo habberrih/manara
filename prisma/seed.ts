@@ -11,6 +11,7 @@ export const userData: Prisma.UserCreateInput[] = [
     name: 'Abdullah Habberrih',
     email: 'habberrih@manara.ly',
     password,
+    isSuperAdmin: true,
     createdAt: new Date('2025-10-27'),
     updatedAt: new Date('2025-10-27'),
   },

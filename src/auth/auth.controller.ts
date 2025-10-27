@@ -14,7 +14,10 @@ import { CreateLoginDto } from './dto/create-login.dto';
 import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
 
 @ApiTags('Authentication')
-@Controller('auth')
+@Controller({
+  version: '1',
+  path: 'auth',
+})
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
