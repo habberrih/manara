@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from './auth/guards/jwt.guard';
 import { PrismaExceptionFilter } from './helpers';
+import { OrganizationsModule } from './organization/organizations.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { UserModule } from './user/user.module';
 
@@ -19,6 +20,7 @@ import { UserModule } from './user/user.module';
     }),
     PrismaModule,
     AuthModule,
+    OrganizationsModule,
     UserModule,
   ],
   controllers: [AppController],

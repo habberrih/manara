@@ -13,6 +13,11 @@ enum OrgRole {
   MEMBER
 }
 
+enum MembershipStatus {
+  PENDING
+  ACCEPTED
+}
+
 enum Plan {
   FREE
   PRO
@@ -53,6 +58,7 @@ model Membership {
   userId         String       @map("user_id")
   organizationId String       @map("organization_id")
   role           OrgRole      @default(MEMBER)
+  status         MembershipStatus @default(PENDING)
   user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   createdAt      DateTime     @default(now()) @map("created_at")
