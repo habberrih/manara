@@ -30,13 +30,10 @@ jobs:
         run: npm ci
 
       - name: Prettier check
-        run: npx prettier --check "src/**/*.ts" "test/**/*.ts"
-
-      - name: Lint
-        run: npx eslint "{src,apps,libs,test}/**/*.ts" --max-warnings=0
+        run: npm run format:check
 
       - name: Type check
-        run: npx tsc --noEmit
+        run: npm run type-check
 
       # - name: Unit tests
       #   run: npm test -- --runInBand
