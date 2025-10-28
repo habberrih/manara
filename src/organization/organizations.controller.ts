@@ -29,8 +29,8 @@ import {
   GetCurrentUser,
   OrganizationMemberGuard,
   OrganizationRoles,
-  TenantContextInterceptor,
   PaginationParams,
+  TenantContextInterceptor,
 } from 'src/helpers';
 import { CreateOrganizationDto } from './dto/create-organization.dto';
 import { InviteMemberDto } from './dto/invite-member.dto';
