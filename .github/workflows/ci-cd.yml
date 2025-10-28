@@ -12,7 +12,7 @@ env:
   NODE_VERSION: '22'
 
 jobs:
-  lint-test-build:
+  build:
     runs-on: ubuntu-latest
     env:
       CI: true
