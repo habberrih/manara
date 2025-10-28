@@ -6,7 +6,12 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Prisma, PrismaClient } from '@prisma/client';
-import { withSensitiveRedaction, withSoftDeleteFilter } from 'src/helpers';
+import {
+  withOrganizationScope,
+  withSensitiveRedaction,
+  withSoftDeleteFilter,
+} from 'src/helpers';
+import { TenantContextService } from 'src/tenant/tenant-context.service';
 
 /**
  * PrismaService is a wrapper around the PrismaClient that provides database access
@@ -48,7 +53,10 @@ export class PrismaService
    * @param {ConfigService} configService - The configuration service for environment variables
    * @param {string} [configService.get('NODE_ENV')] - Determines the logging level
    */
-  constructor(private readonly configService: ConfigService) {
+  constructor(
+    private readonly configService: ConfigService,
+    private readonly tenantContext: TenantContextService,
+  ) {
     const env = configService.get<string>('NODE_ENV') || 'development';
     super({
       log: PrismaService.resolveLogging(env),
@@ -60,11 +68,20 @@ export class PrismaService
     const withSoftDelete = withSoftDeleteFilter(this, {
       field: 'deletedAt',
       // Apply soft-delete filter only to models that define deletedAt
-      models: ['User', 'Esim'],
+      models: ['User', 'Organization', 'Membership', 'ApiKey'],
       // operations: ['findFirst','findMany','count','aggregate','groupBy'],
     });
 
-    const extended = withSensitiveRedaction(withSoftDelete);
+    const withTenantScope = withOrganizationScope(
+      withSoftDelete,
+      tenantContext,
+      {
+        field: 'organizationId',
+        models: ['Membership', 'Subscription', 'ApiKey'],
+      },
+    );
+
+    const extended = withSensitiveRedaction(withTenantScope);
     Object.assign(this, extended);
   }
 
