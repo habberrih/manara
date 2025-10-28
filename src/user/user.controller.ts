@@ -52,8 +52,7 @@ export class UsersController {
 
   @HttpCode(HttpStatus.OK)
   @ApiOkResponse({
-    description:
-      'Get user by userId. If not found, throws NotFoundException.',
+    description: 'Get user by userId. If not found, throws NotFoundException.',
     type: UserResponseDto,
   })
   @Get(':userId')

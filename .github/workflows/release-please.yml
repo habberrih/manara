@@ -1,0 +1,54 @@
+name: Release Please
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          release-type: node
+
+      - uses: actions/checkout@v5
+        if: ${{ steps.release.outputs.release_created }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        if: ${{ steps.release.outputs.release_created }}
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        if: ${{ steps.release.outputs.release_created }}
+        run: npm ci
+
+      - name: Build project
+        if: ${{ steps.release.outputs.release_created }}
+        run: npm run build
+
+      - name: Create release artifacts
+        if: ${{ steps.release.outputs.release_created }}
+        run: |
+          tar -czf habberrih-${{ steps.release.outputs.tag_name }}.tar.gz .next/
+          zip -r habberrih-${{ steps.release.outputs.tag_name }}.zip .next/
+
+      - name: Upload Release Artifacts
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload ${{ steps.release.outputs.tag_name }} \
+            habberrih-${{ steps.release.outputs.tag_name }}.tar.gz \
+            habberrih-${{ steps.release.outputs.tag_name }}.zip
