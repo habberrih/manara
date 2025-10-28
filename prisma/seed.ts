@@ -5,8 +5,8 @@ import {
   Prisma,
   PrismaClient,
 } from '@prisma/client';
-import { createHash } from 'node:crypto';
 import * as bcrypt from 'bcryptjs';
+import { createHash } from 'node:crypto';
 
 const prisma = new PrismaClient();
 
@@ -36,7 +36,12 @@ const userData: Array<Omit<Prisma.UserCreateInput, 'memberships'>> = [
   },
 ];
 
-const organizationData: Array<Omit<Prisma.OrganizationCreateInput, 'memberships' | 'subscriptions' | 'apiKeys'>> = [
+const organizationData: Array<
+  Omit<
+    Prisma.OrganizationCreateInput,
+    'memberships' | 'subscriptions' | 'apiKeys'
+  >
+> = [
   {
     id: '5a1e0b32-6de9-4ec9-b41f-39d1df5a5f02',
     name: 'Minara Demo Org',
