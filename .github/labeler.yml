@@ -1,0 +1,55 @@
+dependencies:
+  - created-by: dependabot[bot]
+  - title: '/^chore\(deps(.*)?\):/i'
+
+ci:
+  - changed-files:
+      - any-glob-to-any-file:
+          - '.github/workflows/**'
+
+docs:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'README.md'
+          - 'docs/**'
+          - 'CONTRIBUTING.md'
+          - 'CODE_OF_CONDUCT.md'
+
+tests:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'test/**'
+          - 'tests/**'
+          - '**/*.spec.ts'
+
+area/auth:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'src/auth/**'
+
+area/organizations:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'src/organization/**'
+
+area/users:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'src/user/**'
+
+area/prisma:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'prisma/**'
+          - 'src/prisma/**'
+
+area/helpers:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'src/helpers/**'
+
+area/docs:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'docs/core/**'
+          - 'docs/pr-descriptions/**'
