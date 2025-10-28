@@ -1,0 +1,55 @@
+- name: dependencies
+  color: '0366d6'
+  description: Dependency version updates
+
+- name: ci
+  color: 'fbca04'
+  description: GitHub Actions / CI workflows
+
+- name: type/feature
+  color: '0e8a16'
+  description: New features or significant enhancements
+
+- name: type/bug
+  color: 'd73a4a'
+  description: Bug fixes or regressions
+
+- name: type/refactor
+  color: 'cfd3d7'
+  description: Internal refactors or technical debt cleanup
+
+- name: type/chore
+  color: 'fef2c0'
+  description: Routine maintenance and project chores
+
+- name: docs
+  color: '0b5fff'
+  description: Documentation updates
+
+- name: tests
+  color: '5319e7'
+  description: Automated tests and fixtures
+
+- name: area/auth
+  color: 'a2eeef'
+  description: Authentication and authorization changes
+
+- name: area/organizations
+  color: '1d76db'
+  description: Organization, membership, or API key changes
+
+- name: area/users
+  color: 'bfd4f2'
+  description: User module and profile changes
+
+- name: area/prisma
+  color: 'c1f0c7'
+  description: Prisma schema, migrations, or database access
+
+- name: area/helpers
+  color: 'f9d0c4'
+  description: Shared helpers, decorators, guards, or middleware
+
+- name: area/docs
+  color: '94d3ac'
+  description: Project documentation under docs/
