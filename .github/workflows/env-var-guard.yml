@@ -1,0 +1,136 @@
+name: Env Var Guard
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - edited
+
+jobs:
+  publish-checklist:
+    if: github.event.pull_request.base.ref == 'main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+    steps:
+      - name: Comment required env var updates
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const commentTag = '<!-- env-var-guard -->';
+            const { owner, repo } = context.repo;
+            const pull_number = context.payload.pull_request.number;
+            const baseRef = context.payload.pull_request.base.ref;
+
+            const files = await github.paginate(
+              github.rest.pulls.listFiles,
+              { owner, repo, pull_number, per_page: 100 }
+            );
+
+            const parsePatch = (patch) => {
+              if (!patch) {
+                return { added: [], removed: [], updated: [], hasChanges: false };
+              }
+
+              const added = new Set();
+              const removed = new Set();
+
+              for (const rawLine of patch.split('\n')) {
+                // Only look at +/- hunks (skip file headers +++/---)
+                if (!(rawLine.startsWith('+') || rawLine.startsWith('-'))) continue;
+                if (rawLine.startsWith('+++') || rawLine.startsWith('---')) continue;
+
+                const line = rawLine.slice(1).trim();
+                if (!line || line.startsWith('#')) continue;
+
+                // Match ENV_KEY=VALUE (keys are A-Z, 0-9, and _)
+                const match = line.match(/^([A-Z0-9_]+)=/);
+                if (!match) continue;
+
+                const key = match[1];
+                if (rawLine.startsWith('+')) {
+                  added.add(key);
+                } else if (rawLine.startsWith('-')) {
+                  removed.add(key);
+                }
+              }
+
+              const addedOnly = [...added].filter((k) => !removed.has(k)).sort();
+              const removedOnly = [...removed].filter((k) => !added.has(k)).sort();
+              const updated = [...added].filter((k) => removed.has(k)).sort();
+
+              return {
+                added: addedOnly,
+                removed: removedOnly,
+                updated,
+                hasChanges: addedOnly.length > 0 || removedOnly.length > 0 || updated.length > 0,
+              };
+            };
+
+            const envExampleFile = files.find((f) => f.filename === '.env.example');
+            const envExampleChanges = parsePatch(envExampleFile?.patch);
+
+            const existingComments = await github.paginate(
+              github.rest.issues.listComments,
+              { owner, repo, issue_number: pull_number, per_page: 100 }
+            );
+
+            const existing = existingComments.find(
+              (c) => c.user?.login === 'github-actions[bot]' && c.body?.includes(commentTag)
+            );
+
+            if (!envExampleChanges.hasChanges) {
+              if (existing) {
+                await github.rest.issues.deleteComment({
+                  owner,
+                  repo,
+                  comment_id: existing.id,
+                });
+              }
+              return;
+            }
+
+            const summaryLines = [];
+            if (envExampleChanges.added.length) {
+              summaryLines.push(`- Added: ${envExampleChanges.added.join(', ')}`);
+            }
+            if (envExampleChanges.removed.length) {
+              summaryLines.push(`- Removed: ${envExampleChanges.removed.join(', ')}`);
+            }
+            if (envExampleChanges.updated.length) {
+              summaryLines.push(`- Updated: ${envExampleChanges.updated.join(', ')}`);
+            }
+
+            const targetEnv = baseRef === 'main' ? 'production' : baseRef;
+
+            const body = [
+              commentTag,
+              'Environment Variable Reminder',
+              '',
+              `Detected changes to .env.example. Before merging into ${targetEnv}, review and sync the variables below in the appropriate environment or secret store.`,
+              '',
+              ...summaryLines,
+              ''
+            ].join('\n');
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner,
+                repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: pull_number,
+                body,
+              });
+            }
