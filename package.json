@@ -24,8 +24,6 @@
     "prisma:seed:dev": "npm run migrate:dev && npx prisma db seed"
   },
   "dependencies": {
-    "@adminjs/express": "^6.1.1",
-    "@adminjs/prisma": "^5.0.4",
     "@nestjs/common": "^11.1.8",
     "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.1.8",
