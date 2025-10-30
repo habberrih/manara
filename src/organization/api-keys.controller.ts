@@ -25,7 +25,7 @@ import {
   OrganizationMemberGuard,
   OrganizationRoles,
   TenantContextInterceptor,
-} from 'src/helpers';
+} from 'src/common';
 import { ApiKeysService } from './api-keys.service';
 import { CreateApiKeyDto } from './dto/create-api-key.dto';
 import {

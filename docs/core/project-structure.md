@@ -75,7 +75,7 @@ This document describes the recommended repository layout and module responsibil
 
 ## Testing
 
-- Unit tests for services, guards, and pure helpers.
+- Unit tests for services, guards, and shared utilities.
 - E2E tests for critical user flows and billing webhooks.
 - Prefer in-memory or isolated test DB with Prisma migrate in test setup.
 
@@ -91,4 +91,3 @@ This document describes the recommended repository layout and module responsibil
 - Co-locate module tests under `test/` mirroring `src/modules/*` paths.
 
 For broader design details, see `docs/project-sdr.md`.
-

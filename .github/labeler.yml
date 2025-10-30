@@ -43,10 +43,10 @@ area/prisma:
           - 'prisma/**'
           - 'src/prisma/**'
 
-area/helpers:
+area/common:
   - changed-files:
       - any-glob-to-any-file:
-          - 'src/helpers/**'
+          - 'src/common/**'
 
 area/docs:
   - changed-files:

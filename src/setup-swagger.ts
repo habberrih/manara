@@ -4,7 +4,7 @@ import {
   API_PREFIX,
   PUBLIC_AUTH_SUFFIXES,
   VERSION_REGEX,
-} from './helpers/constants';
+} from './common/constants';
 
 /**
  * Sets up Swagger for the NestJS application.

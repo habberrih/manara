@@ -10,7 +10,7 @@ import {
   withOrganizationScope,
   withSensitiveRedaction,
   withSoftDeleteFilter,
-} from 'src/helpers';
+} from 'src/common';
 import { TenantContextService } from 'src/tenant/tenant-context.service';
 
 /**

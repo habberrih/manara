@@ -171,7 +171,7 @@ src/
   auth/
   organization/
   user/
-  helpers/          # decorators, guards, interceptors, middlewares, prisma helpers
+  common/           # decorators, guards, interceptors, middlewares, prisma utilities
   tenant/           # AsyncLocalStorage context + types
   prisma/           # Prisma service/module wrappers
 prisma/

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { OrganizationMemberGuard, TenantContextInterceptor } from 'src/helpers';
+import { OrganizationMemberGuard, TenantContextInterceptor } from 'src/common';
 import { UserModule } from 'src/user/user.module';
 import { ApiKeysController } from './api-keys.controller';
 import { ApiKeysService } from './api-keys.service';

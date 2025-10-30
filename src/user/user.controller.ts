@@ -18,7 +18,7 @@ import {
   GetCurrentUser,
   PaginationInterface,
   PaginationParams,
-} from 'src/helpers';
+} from 'src/common';
 import { UpdatePasswordDto } from './dto/update-password.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserResponseDto } from './entities/user.entity';

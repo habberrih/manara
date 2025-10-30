@@ -46,9 +46,9 @@
   color: 'c1f0c7'
   description: Prisma schema, migrations, or database access
 
-- name: area/helpers
+- name: area/common
   color: 'f9d0c4'
-  description: Shared helpers, decorators, guards, or middleware
+  description: Shared common utilities, decorators, guards, or middleware
 
 - name: area/docs
   color: '94d3ac'

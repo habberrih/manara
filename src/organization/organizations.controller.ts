@@ -31,7 +31,7 @@ import {
   OrganizationRoles,
   PaginationParams,
   TenantContextInterceptor,
-} from 'src/helpers';
+} from 'src/common';
 import { CreateOrganizationDto } from './dto/create-organization.dto';
 import { InviteMemberDto } from './dto/invite-member.dto';
 import { UpdateMembershipDto } from './dto/update-membership.dto';

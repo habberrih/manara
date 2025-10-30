@@ -17,7 +17,7 @@ import {
   PaginationInterface,
   PaginationParams,
   findManyAndCount,
-} from 'src/helpers';
+} from 'src/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UsersService } from 'src/user/user.service';
 import { CreateOrganizationDto } from './dto/create-organization.dto';
