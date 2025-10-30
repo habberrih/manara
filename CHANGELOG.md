@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.0](https://github.com/habberrih/minara/compare/v1.0.0...v1.1.0) (2025-10-30)
+
+
+### Features
+
+* add API constants for routing and authentication ([76d1747](https://github.com/habberrih/minara/commit/76d1747d63fb5a4a78d1e0d5740bb8730da1bb6b))
+* add constants index file to export API constants ([6a8e941](https://github.com/habberrih/minara/commit/6a8e94147751050b7211a71dd0e4c5188fe0f4de))
+* add Swagger setup for API documentation ([30a3e31](https://github.com/habberrih/minara/commit/30a3e3105b23e9f67c863c0a7211635664632228))
+* enable CORS and add helmet middleware for security ([5ce31a4](https://github.com/habberrih/minara/commit/5ce31a49d5c85ff8dc95c153764beb31b634b75c))
+* export SelectiveThrottlerGuard from guards index ([49190a3](https://github.com/habberrih/minara/commit/49190a3d157ece6cfcc90b5a54e0075ec40b2928))
+* implement SelectiveThrottlerGuard for conditional request throttling ([4c58ade](https://github.com/habberrih/minara/commit/4c58adefea2d56c5340f8e9b2cd58673153e167b))
+* integrate SelectiveThrottlerGuard and configure throttling settings ([564fd1b](https://github.com/habberrih/minara/commit/564fd1beff457489de36f82945dd0b4844dc651c))
+
 ## 1.0.0 (2025-10-28)
 
 
