@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_FILTER, APP_GUARD } from '@nestjs/core';
+import { ThrottlerModule } from '@nestjs/throttler';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from './auth/guards/jwt.guard';
-import { PrismaExceptionFilter } from './helpers';
+import { PrismaExceptionFilter, SelectiveThrottlerGuard } from './helpers';
 import { OrganizationsModule } from './organization/organizations.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { UserModule } from './user/user.module';
@@ -18,6 +19,16 @@ import { UserModule } from './user/user.module';
       envFilePath: '.env',
       validatePredefined: true,
     }),
+    ThrottlerModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => [
+        {
+          ttl: Number(config.get('THROTTLE_TTL')),
+          limit: Number(config.get('THROTTLE_LIMIT')),
+        },
+      ],
+    }),
     PrismaModule,
     AuthModule,
     OrganizationsModule,
@@ -26,6 +37,10 @@ import { UserModule } from './user/user.module';
   controllers: [AppController],
   providers: [
     AppService,
+    {
+      provide: APP_GUARD,
+      useClass: SelectiveThrottlerGuard,
+    },
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
