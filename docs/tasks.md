@@ -3,12 +3,12 @@
 This checklist outlines the implementation plan for the Minara SaaS platform, aligned with docs/project-sdr.md.
 
 ## 0) Foundations
-- [X] Add dependencies: `prisma`, `@prisma/client`, `@nestjs/config`, `argon2`, `@nestjs/throttler`, `helmet`, `pino`, `pino-http`, `nestjs-pino`, `bullmq`, `ioredis`, `@adminjs/express`, `adminjs`, `stripe`.
+- [X] Add dependencies: `prisma`, `@prisma/client`, `@nestjs/config`, `bcrypt`, `@nestjs/throttler`, `helmet`, `bullmq`, `ioredis`, `@adminjs/express`, `adminjs`, `stripe`.
 - [X] Generate Prisma client (`npx prisma generate`) and create initial migration.
 - [X] Add `PrismaModule` + `PrismaService` (with shutdown hooks) for DI.
 - [X] Add `ConfigModule` with env validation schema and typed config.
-- [ ] Bootstrap middlewares: Helmet, CORS, request ID, and pino logger.
-- [ ] Set up rate limiting (Nest Throttler) on auth and write routes.
+- [X] Bootstrap middlewares: Helmet, CORS.
+- [X] Set up rate limiting (Nest Throttler) on auth and write routes.
 
 ## 1) Auth Module
 - [X] Local login/register with DTO validation and Argon2 hashing.
