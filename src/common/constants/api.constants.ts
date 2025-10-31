@@ -16,3 +16,5 @@ export const PUBLIC_AUTH_SUFFIXES = [
   '/auth/refresh',
   '/auth/signup',
 ];
+
+export const PUBLIC_HEALTH_SUFFIX = 'health';
