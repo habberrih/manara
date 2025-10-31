@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://github.com/habberrih/minara/compare/v1.1.0...v1.2.0) (2025-10-31)
+
+
+### Features
+
+* add health types for health check functionality ([d67500f](https://github.com/habberrih/minara/commit/d67500f0f76de3ea569dcb931a9e307c448da1cf))
+* add HealthModule to the application imports ([0b5ba25](https://github.com/habberrih/minara/commit/0b5ba25f9f78e3077965f11bcdcc08046d6066f8))
+* add HealthModule with controller and service ([ffc5127](https://github.com/habberrih/minara/commit/ffc512762c85a2188440722623cfe0a610e84f2f))
+* add HealthService with database health check functionality ([2aedbaa](https://github.com/habberrih/minara/commit/2aedbaaa75080386b4f754e1441b55426117e145))
+* add public health suffix for health check endpoints ([dadae96](https://github.com/habberrih/minara/commit/dadae963d936886a994dcf54f54cb3c458d1a669))
+* exclude public health suffix from global API prefix ([8cf043f](https://github.com/habberrih/minara/commit/8cf043f70c114905c49d1b2c008946bad7b463d9))
+* implement HealthController with health check endpoint ([f10eb26](https://github.com/habberrih/minara/commit/f10eb2649242a3b2d51e3c5275e7f991f989c939))
+
 ## [1.1.0](https://github.com/habberrih/minara/compare/v1.0.0...v1.1.0) (2025-10-30)
 
 
