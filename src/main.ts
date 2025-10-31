@@ -2,6 +2,7 @@ import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import helmet from 'helmet';
 import { AppModule } from './app.module';
+import { PUBLIC_HEALTH_SUFFIX } from './common/constants';
 import { setupSwagger } from './setup-swagger';
 
 async function bootstrap() {
@@ -12,7 +13,7 @@ async function bootstrap() {
   });
   app.use(helmet());
 
-  app.setGlobalPrefix('api');
+  app.setGlobalPrefix('api', { exclude: [PUBLIC_HEALTH_SUFFIX] });
 
   app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
 
