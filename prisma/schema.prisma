@@ -44,6 +44,7 @@ model Organization {
   name          String
   slug          String         @unique
   plan          Plan           @default(FREE)
+  stripeCustomerId String?     @map("stripe_customer_id")
   memberships   Membership[]
   subscriptions Subscription[]
   apiKeys       ApiKey[]
@@ -101,4 +102,32 @@ model ApiKey {
 
   @@index([organizationId])
   @@map("api_keys")
+}
+
+model SubscriptionPlan {
+  id              String   @id @default(cuid())
+  plan            Plan
+  stripeProductId String   @map("stripe_product_id")
+  stripePriceId   String   @unique @map("stripe_price_id")
+  nickname        String?
+  interval        String
+  amountCents     Int      @map("amount_cents")
+  currency        String
+  active          Boolean  @default(true)
+  metadata        Json?
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  @@map("subscription_plans")
+}
+
+model PaymentEvent {
+  id              String   @id @default(cuid())
+  provider        String
+  providerEventId String   @unique @map("provider_event_id")
+  type            String
+  payload         Json
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  @@map("payment_events")
 }

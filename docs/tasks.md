@@ -23,10 +23,10 @@ This checklist outlines the implementation plan for the Minara SaaS platform, al
 - [x] Tenant scoping guard/interceptor + Prisma middleware enforcing `organizationId`.
 
 ## 3) Subscriptions Module
-- [ ] Stripe integration (products/plans sync, customer creation).
-- [ ] Webhook handlers (checkout, subscription updated/canceled); idempotent store.
-- [ ] Plan limit guard/interceptor applied to relevant endpoints.
-- [ ] Graceful downgrade handling on subscription lapse.
+- [x] Stripe integration (products/plans sync, customer creation).
+- [x] Webhook handlers (checkout, subscription updated/canceled); idempotent store.
+- [x] Plan limit guard/interceptor applied to relevant endpoints.
+- [x] Graceful downgrade handling on subscription lapse.
 
 ## 4) Admin Module (AdminJS)
 - [ ] Mount AdminJS at `/admin` behind SUPER_ADMIN guard.
@@ -47,7 +47,7 @@ This checklist outlines the implementation plan for the Minara SaaS platform, al
 ## 7) Observability & Health
 - [ ] Add `/health` with DB, Redis, and provider checks.
 - [ ] Expose Prometheus metrics (HTTP, DB, queues).
-- [ ] Pino structured logging with correlation IDs; redact secrets.
+
 
 ## 8) API Docs
 - [ ] Swagger at `/docs` with bearer auth and examples.

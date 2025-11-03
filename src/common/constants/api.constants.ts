@@ -18,3 +18,4 @@ export const PUBLIC_AUTH_SUFFIXES = [
 ];
 
 export const PUBLIC_HEALTH_SUFFIX = 'health';
+export const STRIPE_WEBHOOK_SUFFIX = 'subscriptions/webhook';
