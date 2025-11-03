@@ -79,13 +79,11 @@ describe('SubscriptionsWebhookService (integration-like)', () => {
   it('rejects when webhook secret is not configured', async () => {
     const stripeVariant = {
       webhooks: {
-        constructEvent: jest
-          .fn()
-          .mockReturnValue({
-            id: 'evt',
-            type: 'invoice.created',
-            data: { object: {} },
-          }),
+        constructEvent: jest.fn().mockReturnValue({
+          id: 'evt',
+          type: 'invoice.created',
+          data: { object: {} },
+        }),
       },
       subscriptions: { retrieve: jest.fn() },
     };
