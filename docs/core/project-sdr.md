@@ -2,7 +2,7 @@
 
 ## Overview
 
-Minara is a multi-tenant SaaS backend built with NestJS, PostgreSQL, and Prisma. It provides modular APIs for authentication, organizations, subscriptions, and an admin control panel powered by AdminJS.
+Minara is a multi-tenant SaaS backend built with NestJS, PostgreSQL, and Prisma. It provides modular APIs for authentication, organizations, subscriptions, and operational tooling.
 
 This SDR defines scope, key requirements, design decisions, and operational considerations for the platform.
 
@@ -13,7 +13,7 @@ This SDR defines scope, key requirements, design decisions, and operational cons
 - Multi-tenant architecture with strict org-level isolation.
 - Subscription-based access with plan limits and roles.
 - Clean, versioned REST API fully documented with Swagger.
-- AdminJS dashboard for super-admin operations and support tasks.
+- Internal ops console for super-admin operations and support tasks.
 - Production readiness: logging, metrics, health checks, and safe defaults.
 
 ### Non-Goals
@@ -32,7 +32,7 @@ This SDR defines scope, key requirements, design decisions, and operational cons
 | ORM             | Prisma                            |
 | Database        | PostgreSQL                        |
 | Authentication  | JWT + Refresh Tokens (Passport)   |
-| Admin Panel     | AdminJS (@adminjs/express)        |
+| Internal Ops Console | Custom NestJS module (planned)       |
 | Background Jobs | BullMQ + Redis                    |
 | Caching         | Redis                             |
 | Email           | SMTP (Nodemailer/Resend)          |
@@ -103,9 +103,9 @@ Entities: `Organization`, `Membership (UserOrganization)`, `OrganizationSetting`
 
 ---
 
-## Admin Panel (AdminJS)
+## Internal Ops Console
 
-- Mounted at `/admin`; accessible to `SUPER_ADMIN` only.
+- Planned management surface for super admins (route TBD).
 - Manage Users, Organizations, Subscriptions, Invoices, Audit logs.
 - Dashboard: total users, active orgs, MRR, recent events.
 - Bulk actions: deactivate users, cancel subscriptions, resend invites.

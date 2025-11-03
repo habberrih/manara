@@ -1,6 +1,6 @@
 # Minara SaaS Platform
 
-Minara is a modular SaaS starter built with NestJS, Prisma, PostgreSQL, and an AdminJS-powered back office. It delivers authentication, organization management, tenant-aware data access, and admin tooling so you can ship a multi-tenant product quickly and safely.
+Minara is a modular SaaS starter built with NestJS, Prisma, PostgreSQL, and a growing suite of operational tooling. It delivers authentication, organization management, tenant-aware data access, and admin features so you can ship a multi-tenant product quickly and safely.
 
 ## Table of Contents
 
@@ -37,11 +37,10 @@ The name “Minara” (منارة) means **lighthouse** in Arabic. The project a
 - **API Keys**
   - Organization-scoped keys with SHA-256 hashing and soft deletion.
   - One-time secret return at creation for safe storage by the client.
-- **Tooling & Admin Experience**
+- **Tooling & Operations**
   - Global validation pipes, URI versioning (`/api/v1`), and Swagger with bearer auth.
   - Seed data for demo users, organizations, memberships, and API keys.
   - Linting, formatting, and commit hooks (ESLint, Prettier, Husky, commitlint).
-  - Upcoming AdminJS dashboard for super-admins to manage users, orgs, subscriptions, and API keys (see roadmap).
 
 ## Architecture & Tech Stack
 
@@ -50,7 +49,7 @@ The name “Minara” (منارة) means **lighthouse** in Arabic. The project a
 - **Database:** PostgreSQL using Prisma ORM.
 - **Authentication:** `@nestjs/passport`, JWT strategies for access and refresh tokens.
 - **Security & Utilities:** bcrypt, class-validator/-transformer, AsyncLocalStorage.
-- **Docs & DX:** Swagger (`@nestjs/swagger`), lint-staged, Husky, commitlint, AdminJS (planned module) for an embedded admin front-end.
+- **Docs & DX:** Swagger (`@nestjs/swagger`), lint-staged, Husky, commitlint.
 
 For deeper design notes, see `docs/core/project-sdr.md`.
 
@@ -189,7 +188,6 @@ Services rely on Prisma via `PrismaService`, which composes soft-delete filterin
 Tracked in `docs/tasks.md`. Upcoming milestones:
 
 - Stripe subscriptions (webhooks, limits)
-- AdminJS panel for super admins
 - Notifications & background jobs (BullMQ + Redis)
 - Observability (health checks, metrics, structured logging)
 - Expanded automated tests

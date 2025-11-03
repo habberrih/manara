@@ -16,7 +16,7 @@ This document describes the recommended repository layout and module responsibil
 │  │  ├─ users/                # Profiles, account management
 │  │  ├─ organizations/        # Org CRUD, invites, membership
 │  │  ├─ subscriptions/        # Plans, webhooks, plan limits
-│  │  ├─ admin/                # AdminJS integration, resources, actions
+│  │  ├─ ops-console/          # Internal operations tooling (planned)
 │  │  ├─ projects/             # Sample org-scoped CRUD (reference module)
 │  │  ├─ notifications/        # Email templates, mail service abstraction
 │  │  ├─ audit/                # Audit log writer + query endpoints

@@ -28,11 +28,6 @@ This checklist outlines the implementation plan for the Minara SaaS platform, al
 - [x] Plan limit guard/interceptor applied to relevant endpoints.
 - [x] Graceful downgrade handling on subscription lapse.
 
-## 4) Admin Module (AdminJS)
-- [ ] Mount AdminJS at `/admin` behind SUPER_ADMIN guard.
-- [ ] Register resources: User, Organization, Membership, Subscription, ApiKey.
-- [ ] Add dashboard widgets: active orgs, users, MRR, recent events.
-- [ ] Bulk actions: deactivate users, cancel subscriptions.
 
 ## 5) Notifications Module
 - [ ] Mail transport abstraction (SMTP/Resend) and templates (verify, reset, invite, invoice).
