@@ -1,5 +1,34 @@
 # Changelog
 
+## [1.3.0](https://github.com/habberrih/minara/compare/v1.2.0...v1.3.0) (2025-11-03)
+
+
+### Features
+
+* add constants for Stripe client and webhook secret key ([435f5a2](https://github.com/habberrih/minara/commit/435f5a2a202fb7d373e2767c2c5172c2781bc450))
+* add EnsureCustomerResponseDto for customer ID management ([c4658c4](https://github.com/habberrih/minara/commit/c4658c46c29dd9f9a7e835961bcb69e0b050ddff))
+* add migration for subscription_plans and payment_events tables ([0188b1d](https://github.com/habberrih/minara/commit/0188b1df119b013002653efbd4f0f61e764af272))
+* add plan limits configuration for subscription plans ([20bb531](https://github.com/habberrih/minara/commit/20bb53152a7223dbdf14a8ffede1c17bb5bcf620))
+* add PlanLimit decorator for managing plan limits metadata ([e49ff2a](https://github.com/habberrih/minara/commit/e49ff2ab0983afb9bfeee7d788981a1cc35d9656))
+* add PlanSyncOptions and SyncSummary types for subscription management ([bbb84a7](https://github.com/habberrih/minara/commit/bbb84a70572edd161683198170e2afdc23fd2a0d))
+* add stripe dependency to package.json and package-lock.json ([a5a45b6](https://github.com/habberrih/minara/commit/a5a45b637c6a845d91e0cc4676f294893ca0c89a))
+* add STRIPE_WEBHOOK_SUFFIX constant for subscription webhook handling ([7723d72](https://github.com/habberrih/minara/commit/7723d724de8ce6fadc11ef2eb8c930da0cadf7e9))
+* add SubscriptionPlan and PaymentEvent models to schema ([c8f4c89](https://github.com/habberrih/minara/commit/c8f4c89366a607cfab8566ef8dc7bc200281eb8c))
+* add SubscriptionsModule to OrganizationsModule imports ([62931d7](https://github.com/habberrih/minara/commit/62931d727eebccc40a8c03c716277a8b0938e103))
+* add SubscriptionsModule to the application module imports ([3496cbd](https://github.com/habberrih/minara/commit/3496cbdd8ee5d95d5cc6311448abc7ce7e52cb0c))
+* add SyncPlansRequestDto and SyncPlansResponseDto for plan synchronization ([e5a49f1](https://github.com/habberrih/minara/commit/e5a49f1ccab31ad693d0e29459c17655cf19a377))
+* add WebhookController for handling Stripe subscription webhooks ([82bf3d1](https://github.com/habberrih/minara/commit/82bf3d1443da7023b8aa686ffbbb00aed44c2ed3))
+* create index file to export decorators, DTOs, and types for subscriptions ([c5b3cfe](https://github.com/habberrih/minara/commit/c5b3cfe2a8228516c9bfa447aad62c98e4edf777))
+* create SubscriptionsModule for managing subscriptions and Stripe integration ([22cf436](https://github.com/habberrih/minara/commit/22cf436a8e9b9f323fe103c2581f3c60e589b703))
+* export constants from index file ([74a26d2](https://github.com/habberrih/minara/commit/74a26d29c1ae66ad5ee815fbca68c585467d78b0))
+* export EnsureCustomerResponseDto and SyncPlansDto from index file ([d8b144f](https://github.com/habberrih/minara/commit/d8b144fec070117d78669ac4d2325c55a69e5213))
+* implement PlanLimitGuard for managing plan limits based on organization context ([2f95408](https://github.com/habberrih/minara/commit/2f95408e846dafee9c864c4b0711b66478a79586))
+* implement SubscriptionsController for managing subscription plans and customers ([8327dba](https://github.com/habberrih/minara/commit/8327dba17f097b7b0306330984edffe97797db60))
+* implement SubscriptionsService for managing Stripe subscriptions and plans synchronization ([73658ef](https://github.com/habberrih/minara/commit/73658ef06378d4f3ba63724feb91d0e6480129a8))
+* implement SubscriptionsWebhookService for handling Stripe webhook events ([881fe27](https://github.com/habberrih/minara/commit/881fe27483c841610e803dae51c51223a4fc8312))
+* integrate PlanLimitGuard and add plan limit validation for API key creation ([d8cce8f](https://github.com/habberrih/minara/commit/d8cce8f3b9ec196173f651fffd8f022cc13d9161))
+* update main.ts to include STRIPE_WEBHOOK_SUFFIX for webhook handling ([01bfa33](https://github.com/habberrih/minara/commit/01bfa33b2c1979654390a3260402bb8b16e3d539))
+
 ## [1.2.0](https://github.com/habberrih/minara/compare/v1.1.0...v1.2.0) (2025-10-31)
 
 
