@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/habberrih/minara/compare/v1.3.0...v1.4.0) (2025-11-03)
+
+
+### Features
+
+* add moduleNameMapper to TypeScript configuration for improved path resolution ([b4c4e98](https://github.com/habberrih/minara/commit/b4c4e98d8cb6395e936a1430fa98531c2b2839b6))
+
 ## [1.3.0](https://github.com/habberrih/minara/compare/v1.2.0...v1.3.0) (2025-11-03)
 
 
