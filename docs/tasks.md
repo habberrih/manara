@@ -11,7 +11,7 @@ This checklist outlines the implementation plan for the Minara SaaS platform, al
 - [X] Set up rate limiting (Nest Throttler) on auth and write routes.
 
 ## 1) Auth Module
-- [X] Local login/register with DTO validation and Argon2 hashing.
+- [X] Local login/register with DTO validation and bcrypt hashing.
 - [X] JWT access + refresh strategies and guards; refresh token rotation.
 - [ ] Email verification and password reset flows (issue tokens, validate, expire).
 - [X] Session/Token persistence if using server-side refresh tracking.
