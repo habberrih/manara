@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.5.0](https://github.com/habberrih/minara/compare/v1.4.0...v1.5.0) (2025-11-03)
+
+
+### Features
+
+* **prisma:** enhance logging control based on environment settings ([622165e](https://github.com/habberrih/minara/commit/622165e8431a38d3e276cfcec6d27f4d655ddef4))
+
+
+### Bug Fixes
+
+* **tests:** update Jest configuration for correct root directory and test regex ([c0f4963](https://github.com/habberrih/minara/commit/c0f49635e6bcfc6f0935bc9325cbb9f27a666a44))
+
 ## [1.4.0](https://github.com/habberrih/minara/compare/v1.3.0...v1.4.0) (2025-11-03)
 
 
