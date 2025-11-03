@@ -46,6 +46,7 @@ export class PrismaService
   implements OnModuleInit, OnModuleDestroy
 {
   private readonly logger = new Logger(PrismaService.name);
+  private readonly shouldLog: boolean;
 
   /**
    * Creates an instance of PrismaService
@@ -61,6 +62,7 @@ export class PrismaService
     super({
       log: PrismaService.resolveLogging(env),
     });
+    this.shouldLog = env !== 'test';
 
     // IMPORTANT: compose in this order (args first, then result):
     // 1) soft-delete injects filters into args
@@ -95,9 +97,13 @@ export class PrismaService
    * @returns {Promise<void>}
    */
   async onModuleInit(): Promise<void> {
-    this.logger.log('Connecting to the database...');
+    if (this.shouldLog) {
+      this.logger.log('Connecting to the database...');
+    }
     await this.$connect();
-    this.logger.log('Connected to the database.');
+    if (this.shouldLog) {
+      this.logger.log('Connected to the database.');
+    }
   }
 
   /**
@@ -110,9 +116,13 @@ export class PrismaService
    * @returns {Promise<void>}
    */
   async onModuleDestroy(): Promise<void> {
-    this.logger.log('Disconnecting from the database...');
+    if (this.shouldLog) {
+      this.logger.log('Disconnecting from the database...');
+    }
     await this.$disconnect();
-    this.logger.log('Disconnected from the database.');
+    if (this.shouldLog) {
+      this.logger.log('Disconnected from the database.');
+    }
   }
 
   /**
@@ -130,8 +140,12 @@ export class PrismaService
   private static resolveLogging(
     env: string,
   ): (Prisma.LogLevel | Prisma.LogDefinition)[] {
-    return env === 'production'
-      ? ['error']
-      : ['query', 'info', 'warn', 'error'];
+    if (env === 'production') {
+      return ['error'];
+    }
+    if (env === 'test') {
+      return [];
+    }
+    return ['query', 'info', 'warn', 'error'];
   }
 }
