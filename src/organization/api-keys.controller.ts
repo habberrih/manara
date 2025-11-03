@@ -26,6 +26,8 @@ import {
   OrganizationRoles,
   TenantContextInterceptor,
 } from 'src/common';
+import { PlanLimit } from 'src/subscriptions';
+import { PlanLimitGuard } from 'src/subscriptions/guards/plan-limit.guard';
 import { ApiKeysService } from './api-keys.service';
 import { CreateApiKeyDto } from './dto/create-api-key.dto';
 import {
@@ -34,7 +36,7 @@ import {
 } from './entities/api-key.entity';
 
 @ApiTags('Organization API Keys')
-@UseGuards(OrganizationMemberGuard)
+@UseGuards(OrganizationMemberGuard, PlanLimitGuard)
 @OrganizationRoles(OrgRole.ADMIN, OrgRole.OWNER)
 @UseInterceptors(ClassSerializerInterceptor, TenantContextInterceptor)
 @Controller({
@@ -46,6 +48,9 @@ export class ApiKeysController {
 
   @ApiOperation({ summary: 'Create a new API key for the organization' })
   @ApiCreatedResponse({ type: ApiKeyWithSecretResponseDto })
+  @PlanLimit('apiKeys', {
+    message: 'You have reached the API key limit for your current plan.',
+  })
   @Post()
   async create(
     @Param('organizationId', new ParseUUIDPipe()) organizationId: string,
