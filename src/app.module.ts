@@ -10,6 +10,7 @@ import { PrismaExceptionFilter, SelectiveThrottlerGuard } from './common';
 import { HealthModule } from './health/health.module';
 import { OrganizationsModule } from './organization/organizations.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { SubscriptionsModule } from './subscriptions/subscriptions.module';
 import { UserModule } from './user/user.module';
 
 @Module({
@@ -33,6 +34,7 @@ import { UserModule } from './user/user.module';
     PrismaModule,
     AuthModule,
     HealthModule,
+    SubscriptionsModule,
     OrganizationsModule,
     UserModule,
   ],
