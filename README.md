@@ -1,4 +1,4 @@
-# Minara SaaS Platform
+# Minara SaaS API
 
 Minara is a modular SaaS starter built with NestJS, Prisma, PostgreSQL, and a growing suite of operational tooling. It delivers authentication, organization management, tenant-aware data access, and admin features so you can ship a multi-tenant product quickly and safely.
 
