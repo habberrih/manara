@@ -7,7 +7,7 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  unit:
+  test:
     runs-on: ubuntu-latest
     if: github.actor != 'dependabot[bot]'
 
