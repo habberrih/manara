@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.1](https://github.com/habberrih/minara/compare/v1.5.0...v1.5.1) (2025-11-24)
+
+
+### Bug Fixes
+
+* restore 'peer' property in multiple dependencies in package-lock.json ([bc55f66](https://github.com/habberrih/minara/commit/bc55f668da7218bc6ceb28a4c1d4ec208a8ff192))
+
 ## [1.5.0](https://github.com/habberrih/minara/compare/v1.4.0...v1.5.0) (2025-11-03)
 
 
