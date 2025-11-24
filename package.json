@@ -25,13 +25,13 @@
     "prisma:seed:dev": "npm run migrate:dev && npx prisma db seed"
   },
   "dependencies": {
-    "@nestjs/common": "^11.1.8",
+    "@nestjs/common": "^11.1.9",
     "@nestjs/config": "^4.0.2",
-    "@nestjs/core": "^11.1.8",
+    "@nestjs/core": "^11.1.9",
     "@nestjs/jwt": "^11.0.1",
     "@nestjs/passport": "^11.0.5",
-    "@nestjs/platform-express": "^11.1.8",
-    "@nestjs/swagger": "^11.2.1",
+    "@nestjs/platform-express": "^11.1.9",
+    "@nestjs/swagger": "^11.2.3",
     "@nestjs/throttler": "^6.4.0",
     "@prisma/client": "^6.19.0",
     "bcryptjs": "^3.0.3",
