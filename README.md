@@ -92,7 +92,9 @@ npm run build
 npm run start:prod
 ```
 
-The API listens on `http://localhost:3000/api/v1`. Swagger UI is available at `http://localhost:3000/docs`.
+The API listens on `http://localhost:3000/api/v1`.  
+
+Swagger UI is available at `http://localhost:3000/docs`.
 
 ## Environment Configuration
 
@@ -198,4 +200,4 @@ Contributions are welcome—feel free to open issues or PRs against those roadma
 
 [MIT licensed](./LICENSE).
 
-Built with ❤️ by Abdullah Habberrih
+> Built with ❤️ by Abdullah Habberrih
