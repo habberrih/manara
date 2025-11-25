@@ -1,4 +1,4 @@
-import { Plan } from '@prisma/client';
+import { Plan } from '../../prisma/generated/enums';
 
 export type PlanFeature = 'apiKeys';
 
