@@ -6,9 +6,14 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { Membership, MembershipStatus, OrgRole, User } from '@prisma/client';
 import { Request } from 'express';
 import { PrismaService } from 'src/prisma/prisma.service';
+import {
+  Membership,
+  MembershipStatus,
+  OrgRole,
+  User,
+} from '../../../prisma/generated/client';
 import { ORG_ROLES_KEY } from '../decorators';
 
 declare module 'express-serve-static-core' {
