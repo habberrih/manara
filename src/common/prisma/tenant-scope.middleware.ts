@@ -1,5 +1,4 @@
 import { TenantContextService } from 'src/tenant/tenant-context.service';
-import { PrismaExtensible } from './extensible';
 
 type TenantScopeOptions = {
   field?: string;
@@ -64,7 +63,7 @@ function ensureDataHasOrganizationId(
     return data;
   }
 
-  const currentValue = data[field];
+  const currentValue = (data as AnyArgs)[field];
   if (currentValue && currentValue !== organizationId) {
     throw new Error('Tenant scope violation: organizationId mismatch.');
   }
@@ -72,15 +71,15 @@ function ensureDataHasOrganizationId(
   return { ...data, [field]: organizationId };
 }
 
-export function withOrganizationScope<T extends PrismaExtensible>(
-  client: T,
+export function withOrganizationScope(
   tenantContext: TenantContextService,
   opts: TenantScopeOptions = {},
 ) {
   const field = opts.field ?? 'organizationId';
   const scopedModels = opts.models?.map(lc);
 
-  const extended = client.$extends({
+  return {
+    name: 'organizationScope',
     query: {
       $allModels: {
         async $allOperations({ model, operation, args, query }) {
@@ -119,7 +118,5 @@ export function withOrganizationScope<T extends PrismaExtensible>(
         },
       },
     },
-  });
-
-  return extended;
+  };
 }
