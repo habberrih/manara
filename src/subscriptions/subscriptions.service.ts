@@ -1,8 +1,8 @@
 import { Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Plan } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import Stripe from 'stripe';
+import { Plan } from '../../prisma/generated/client';
 import { PLAN_LIMITS } from './plan-limits';
 import { STRIPE_CLIENT } from './subscriptions.constants';
 import { PlanSyncOptions, SyncSummary } from './types';

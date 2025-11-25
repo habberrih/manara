@@ -7,8 +7,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { OrgRole } from '@prisma/client';
 import { OrganizationMemberGuard, OrganizationRoles } from 'src/common';
+import { OrgRole } from '../../prisma/generated/enums';
 import {
   EnsureCustomerResponseDto,
   SyncPlansRequestDto,

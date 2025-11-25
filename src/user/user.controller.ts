@@ -12,13 +12,13 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { ApiBody, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { User } from '@prisma/client';
 import { plainToInstance } from 'class-transformer';
 import {
   GetCurrentUser,
   PaginationInterface,
   PaginationParams,
 } from 'src/common';
+import { User } from '../../prisma/generated/client';
 import { UpdatePasswordDto } from './dto/update-password.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserResponseDto } from './entities/user.entity';

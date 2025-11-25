@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { MembershipStatus, OrgRole } from '@prisma/client';
+import { MembershipStatus, OrgRole } from '../../../prisma/generated/enums';
 
 export class MembershipResponseDto {
   @ApiProperty({ description: 'Associated user identifier' })

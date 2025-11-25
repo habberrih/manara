@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Plan } from '@prisma/client';
+import { Plan } from '../../../prisma/generated/enums';
 
 export class OrganizationResponseDto {
   @ApiProperty({ description: 'Organization identifier' })

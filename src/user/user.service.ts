@@ -6,7 +6,6 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { User } from '@prisma/client';
 import * as bcrypt from 'bcryptjs';
 import {
   findManyAndCount,
@@ -14,6 +13,7 @@ import {
   PaginationParams,
 } from 'src/common';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { User } from '../../prisma/generated/client';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdatePasswordDto } from './dto/update-password.dto';
 import { UpdateUserDto } from './dto/update-user.dto';

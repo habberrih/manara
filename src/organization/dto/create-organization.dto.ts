@@ -1,5 +1,4 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Plan } from '@prisma/client';
 import {
   IsEnum,
   IsNotEmpty,
@@ -8,6 +7,7 @@ import {
   Length,
   Matches,
 } from 'class-validator';
+import { Plan } from '../../../prisma/generated/enums';
 
 const SLUG_REGEX = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 

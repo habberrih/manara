@@ -1,6 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { OrgRole } from '@prisma/client';
 import { IsEnum, IsOptional, IsUUID } from 'class-validator';
+import { OrgRole } from '../../../prisma/generated/enums';
 
 export class InviteMemberDto {
   @ApiProperty({
