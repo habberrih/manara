@@ -1,5 +1,5 @@
 import { SetMetadata } from '@nestjs/common';
-import { OrgRole } from '@prisma/client';
+import { OrgRole } from '../../../prisma/generated/enums';
 
 export const ORG_ROLES_KEY = 'orgRoles';
 export const OrganizationRoles = (...roles: OrgRole[]) =>
