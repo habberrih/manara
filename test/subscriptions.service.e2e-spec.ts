@@ -1,9 +1,9 @@
 import { Logger, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Plan } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { SubscriptionsService } from 'src/subscriptions/subscriptions.service';
 import Stripe from 'stripe';
+import { Plan } from '../prisma/generated/enums';
 
 type PrismaMock = {
   subscriptionPlan: {
