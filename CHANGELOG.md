@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.6.0](https://github.com/habberrih/minara/compare/v1.5.1...v1.6.0) (2025-11-26)
+
+
+### Features
+
+* add Prisma configuration file after v7 upgrade ([1d3ab5c](https://github.com/habberrih/minara/commit/1d3ab5c7c7ce4293a95e69f180bf3a823155e7a9))
+
+
+### Bug Fixes
+
+* add Prisma client generation step to CI and test workflows ([935718b](https://github.com/habberrih/minara/commit/935718b0027880554a1c2ee9c1c64bbcb5ed15a6))
+
 ## [1.5.1](https://github.com/habberrih/minara/compare/v1.5.0...v1.5.1) (2025-11-24)
 
 
