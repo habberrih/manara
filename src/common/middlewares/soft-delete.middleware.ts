@@ -1,5 +1,3 @@
-import { PrismaExtensible } from '../prisma';
-
 type SoftDeleteOpts = {
   /** The soft-delete field name. Defaults to 'deletedAt'. */
   field?: string;
@@ -52,10 +50,7 @@ function withWhere(args: unknown, newWhere: any): AnyArgs {
  *  - Else try to add { deletedAt: null } directly to unique where.
  *  - If Prisma rejects due to unique-shape requirements, fallback to findFirst with AND filter.
  */
-export function withSoftDeleteFilter<T extends PrismaExtensible>(
-  client: T,
-  opts: SoftDeleteOpts = {},
-) {
+export function withSoftDeleteFilter(opts: SoftDeleteOpts = {}) {
   const field = opts.field ?? 'deletedAt';
   const allowedModels = opts.models?.map(lc);
   const readOps = new Set(
@@ -68,7 +63,9 @@ export function withSoftDeleteFilter<T extends PrismaExtensible>(
     ]) as string[],
   );
 
-  const extended = (client as any).$extends({
+  return {
+    name: 'softDeleteFilter',
+
     query: {
       $allModels: {
         async $allOperations({ model, operation, args, query }) {
@@ -109,10 +106,7 @@ export function withSoftDeleteFilter<T extends PrismaExtensible>(
                 ? { AND: [{ [field]: null }, where] }
                 : { [field]: null };
 
-              // --- IMPORTANT ---
-              // TS can't resolve delegate overloads here since `model` is dynamic.
-              // We intentionally cast to `any` to avoid 2345 errors.
-              const delegate: any = (client as any)[lc(model)];
+              const delegate: any = this[lc(model)];
               const ffArgs: any = withWhere(args, ffWhere);
 
               // Using delegate.findFirst(...) instead of query(...) to avoid infinite recursion
@@ -142,7 +136,5 @@ export function withSoftDeleteFilter<T extends PrismaExtensible>(
         },
       },
     },
-  });
-
-  return extended as T;
+  };
 }

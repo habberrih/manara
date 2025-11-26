@@ -23,7 +23,6 @@ import {
   ApiTags,
   getSchemaPath,
 } from '@nestjs/swagger';
-import { OrgRole, User } from '@prisma/client';
 import { plainToInstance } from 'class-transformer';
 import {
   GetCurrentUser,
@@ -32,6 +31,8 @@ import {
   PaginationParams,
   TenantContextInterceptor,
 } from 'src/common';
+import { User } from '../../prisma/generated/client';
+import { OrgRole } from '../../prisma/generated/enums';
 import { CreateOrganizationDto } from './dto/create-organization.dto';
 import { InviteMemberDto } from './dto/invite-member.dto';
 import { UpdateMembershipDto } from './dto/update-membership.dto';

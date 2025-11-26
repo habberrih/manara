@@ -5,8 +5,8 @@ import {
   HttpStatus,
   Logger,
 } from '@nestjs/common';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { Response } from 'express';
+import { PrismaClientKnownRequestError } from '../../../prisma/generated/internal/prismaNamespace';
 
 /**
  * Global exception filter for handling Prisma database errors

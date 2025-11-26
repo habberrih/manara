@@ -5,13 +5,14 @@ import {
   OnModuleInit,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Prisma, PrismaClient } from '@prisma/client';
+import { PrismaPg } from '@prisma/adapter-pg';
 import {
   withOrganizationScope,
   withSensitiveRedaction,
   withSoftDeleteFilter,
 } from 'src/common';
 import { TenantContextService } from 'src/tenant/tenant-context.service';
+import { Prisma, PrismaClient } from '../../prisma/generated/client';
 
 /**
  * PrismaService is a wrapper around the PrismaClient that provides database access
@@ -59,31 +60,39 @@ export class PrismaService
     private readonly tenantContext: TenantContextService,
   ) {
     const env = configService.get<string>('NODE_ENV') || 'development';
+
+    const adapter = new PrismaPg({
+      connectionString: configService.get<string>('DATABASE_URL')!,
+    });
+    // Logging config
     super({
+      adapter,
       log: PrismaService.resolveLogging(env),
     });
+
     this.shouldLog = env !== 'test';
 
     // IMPORTANT: compose in this order (args first, then result):
     // 1) soft-delete injects filters into args
     // 2) redaction strips sensitive fields from results
-    const withSoftDelete = withSoftDeleteFilter(this, {
+    const withSoftDelete = withSoftDeleteFilter({
       field: 'deletedAt',
       // Apply soft-delete filter only to models that define deletedAt
       models: ['User', 'Organization', 'Membership', 'ApiKey'],
       // operations: ['findFirst','findMany','count','aggregate','groupBy'],
     });
 
-    const withTenantScope = withOrganizationScope(
-      withSoftDelete,
-      tenantContext,
-      {
-        field: 'organizationId',
-        models: ['Membership', 'Subscription', 'ApiKey'],
-      },
-    );
+    const orgScopeExt = withOrganizationScope(this.tenantContext, {
+      field: 'organizationId',
+      models: ['Membership', 'Subscription', 'ApiKey'],
+    });
 
-    const extended = withSensitiveRedaction(withTenantScope);
+    const sensitiveExt = withSensitiveRedaction();
+
+    const extended = this.$extends(withSoftDelete)
+      .$extends(orgScopeExt)
+      .$extends(sensitiveExt);
+
     Object.assign(this, extended);
   }
 

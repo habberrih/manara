@@ -1,8 +1,8 @@
 import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
-import { Plan } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import Stripe from 'stripe';
+import { Plan } from '../../prisma/generated/enums';
 import { STRIPE_CLIENT } from './subscriptions.constants';
 import { SubscriptionsService } from './subscriptions.service';
 

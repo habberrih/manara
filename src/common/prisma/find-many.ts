@@ -1,5 +1,5 @@
-import { Prisma } from '@prisma/client';
 import { DelegateOf, PaginationInterface, SearchableFields } from '..';
+import { Prisma } from '../../../prisma/generated/client';
 
 export async function findManyAndCount<
   TModel,

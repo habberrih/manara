@@ -1,5 +1,3 @@
-import { PrismaExtensible } from '../prisma';
-
 const SENSITIVE_KEYS = new Set(['password', 'refreshToken']);
 
 function isPlainObject(v: unknown): v is Record<string, unknown> {
@@ -57,8 +55,9 @@ function getAllowedSensitiveKeysFromArgs(args: any): Set<string> {
   return allow;
 }
 
-export function withSensitiveRedaction<T extends PrismaExtensible>(client: T) {
-  const extended = (client as any).$extends({
+export function withSensitiveRedaction() {
+  return {
+    name: 'sensitiveRedaction',
     query: {
       $allModels: {
         async $allOperations({ model, operation, args, query }) {
@@ -92,7 +91,5 @@ export function withSensitiveRedaction<T extends PrismaExtensible>(client: T) {
         },
       },
     },
-  });
-
-  return extended as T;
+  };
 }

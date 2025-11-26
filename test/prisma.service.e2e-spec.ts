@@ -1,8 +1,12 @@
-jest.mock('@prisma/client', () => {
+jest.mock('../prisma/generated/client', () => {
   class PrismaClientMock {
     public $connect = jest.fn().mockResolvedValue(undefined);
     public $disconnect = jest.fn().mockResolvedValue(undefined);
     public use = jest.fn();
+    public $extends(..._args: any[]) {
+      const chain: any = { $extends: (_: any) => chain };
+      return chain;
+    }
   }
 
   return {

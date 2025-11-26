@@ -1,14 +1,18 @@
+import { PrismaPg } from '@prisma/adapter-pg';
+import * as bcrypt from 'bcryptjs';
+import { createHash } from 'node:crypto';
 import {
   MembershipStatus,
   OrgRole,
   Plan,
   Prisma,
   PrismaClient,
-} from '@prisma/client';
-import * as bcrypt from 'bcryptjs';
-import { createHash } from 'node:crypto';
+} from './generated/client';
 
-const prisma = new PrismaClient();
+const adapter = new PrismaPg({
+  connectionString: process.env.DATABASE_URL,
+});
+const prisma = new PrismaClient({ adapter });
 
 const password = bcrypt.hashSync('password', 10);
 

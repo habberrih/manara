@@ -7,8 +7,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
-import { User } from '@prisma/client';
 import { GetCurrentUser, Public } from 'src/common';
+import { User } from '../../prisma/generated/client';
 import { AuthService } from './auth.service';
 import { CreateLoginDto } from './dto/create-login.dto';
 import { JwtRefreshGuard } from './guards/jwt-refresh.guard';

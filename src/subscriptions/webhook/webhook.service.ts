@@ -6,9 +6,9 @@ import {
   Logger,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import Stripe from 'stripe';
+import { Prisma } from '../../../prisma/generated/client';
 import {
   STRIPE_CLIENT,
   SUBSCRIPTION_WEBHOOK_SECRET_KEY,

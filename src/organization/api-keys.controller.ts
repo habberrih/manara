@@ -19,7 +19,6 @@ import {
   ApiParam,
   ApiTags,
 } from '@nestjs/swagger';
-import { OrgRole } from '@prisma/client';
 import { plainToInstance } from 'class-transformer';
 import {
   OrganizationMemberGuard,
@@ -28,6 +27,7 @@ import {
 } from 'src/common';
 import { PlanLimit } from 'src/subscriptions';
 import { PlanLimitGuard } from 'src/subscriptions/guards/plan-limit.guard';
+import { OrgRole } from '../../prisma/generated/enums';
 import { ApiKeysService } from './api-keys.service';
 import { CreateApiKeyDto } from './dto/create-api-key.dto';
 import {

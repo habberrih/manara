@@ -1,7 +1,7 @@
 import { ClassSerializerInterceptor } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { OrgRole } from '@prisma/client';
 import { OrganizationMemberGuard, TenantContextInterceptor } from 'src/common';
+import { OrgRole } from '../../prisma/generated/enums';
 import { MembershipResponseDto } from './entities/membership.entity';
 import { OrganizationResponseDto } from './entities/organization.entity';
 import { OrganizationsController } from './organizations.controller';
