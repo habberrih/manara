@@ -30,6 +30,8 @@ jobs:
         run: npm ci
 
       - name: Generate Prisma client
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npx prisma generate --schema=prisma/schema.prisma
 
       - name: Prettier check
