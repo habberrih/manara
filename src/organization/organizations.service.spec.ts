@@ -5,16 +5,11 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import {
-  MembershipStatus,
-  OrgRole,
-  Organization,
-  Plan,
-  Prisma,
-} from '@prisma/client';
 import { findManyAndCount } from 'src/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UsersService } from 'src/user/user.service';
+import { Organization, Prisma } from '../../prisma/generated/client';
+import { MembershipStatus, OrgRole, Plan } from '../../prisma/generated/enums';
 import { CreateOrganizationDto } from './dto/create-organization.dto';
 import { InviteMemberDto } from './dto/invite-member.dto';
 import { UpdateMembershipDto } from './dto/update-membership.dto';

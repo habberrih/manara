@@ -1,6 +1,11 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { MembershipStatus, OrgRole, Organization, User } from '@prisma/client';
+import {
+  MembershipStatus,
+  OrgRole,
+  Organization,
+  User,
+} from '../prisma/generated/client';
 import { OrganizationMemberGuard, PaginationInterface } from '../src/common';
 import { MembershipResponseDto } from '../src/organization/entities/membership.entity';
 import { OrganizationResponseDto } from '../src/organization/entities/organization.entity';
