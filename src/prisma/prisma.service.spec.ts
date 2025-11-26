@@ -1,25 +1,28 @@
 const connectMock = jest.fn();
 const disconnectMock = jest.fn();
 
-const withSoftDeleteFilterMock = jest.fn((client: any, options: any) => {
-  client.__softDeleteOptions = options;
-  return client;
+const withSoftDeleteFilterMock = jest.fn(() => {
+  return {
+    name: 'softDeleteExt',
+    query: { $allModels: { $allOperations: jest.fn() } },
+  } as any;
 });
 
-const withOrganizationScopeMock = jest.fn(
-  (client: any, tenantContext: any, options: any) => {
-    client.__tenantOptions = options;
-    client.__tenantContext = tenantContext;
-    return client;
-  },
-);
-
-const withSensitiveRedactionMock = jest.fn((client: any) => {
-  client.__redactionApplied = true;
-  return client;
+const withOrganizationScopeMock = jest.fn(() => {
+  return {
+    name: 'orgScopeExt',
+    query: { $allModels: { $allOperations: jest.fn() } },
+  } as any;
 });
 
-jest.mock('@prisma/client', () => {
+const withSensitiveRedactionMock = jest.fn(() => {
+  return {
+    name: 'sensitiveExt',
+    query: { $allModels: { $allOperations: jest.fn() } },
+  } as any;
+});
+
+jest.mock('../../prisma/generated/client', () => {
   class PrismaClientMock {
     public _log: any;
     constructor(options?: { log?: any }) {
@@ -28,6 +31,10 @@ jest.mock('@prisma/client', () => {
 
     $connect = connectMock;
     $disconnect = disconnectMock;
+    $extends(..._args: any[]) {
+      const chain: any = { $extends: (_: any) => chain };
+      return chain;
+    }
   }
 
   const PrismaStub = {
@@ -101,7 +108,6 @@ describe('PrismaService', () => {
 
   it('invokes soft delete, tenant scope, and redaction helpers during construction', () => {
     expect(withSoftDeleteFilterMock).toHaveBeenCalledWith(
-      service,
       expect.objectContaining({
         field: 'deletedAt',
         models: ['User', 'Organization', 'Membership', 'ApiKey'],
@@ -109,7 +115,6 @@ describe('PrismaService', () => {
     );
 
     expect(withOrganizationScopeMock).toHaveBeenCalledWith(
-      expect.any(Object),
       tenantContext,
       expect.objectContaining({
         field: 'organizationId',
@@ -118,7 +123,6 @@ describe('PrismaService', () => {
     );
 
     expect(withSensitiveRedactionMock).toHaveBeenCalled();
-    expect((service as any).__redactionApplied).toBe(true);
   });
 
   it('connects and disconnects via lifecycle hooks', async () => {
