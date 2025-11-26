@@ -5,13 +5,6 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import {
-  MembershipStatus,
-  OrgRole,
-  Organization,
-  Plan,
-  Prisma,
-} from '@prisma/client';
 import { findManyAndCount } from 'src/common';
 import { CreateOrganizationDto } from 'src/organization/dto/create-organization.dto';
 import { InviteMemberDto } from 'src/organization/dto/invite-member.dto';
@@ -20,6 +13,13 @@ import { UpdateOrganizationDto } from 'src/organization/dto/update-organization.
 import { OrganizationsService } from 'src/organization/organizations.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UsersService } from 'src/user/user.service';
+import {
+  MembershipStatus,
+  OrgRole,
+  Organization,
+  Plan,
+  Prisma,
+} from '../prisma/generated/client';
 
 jest.mock('src/common', () => {
   const actual = jest.requireActual('src/common');
