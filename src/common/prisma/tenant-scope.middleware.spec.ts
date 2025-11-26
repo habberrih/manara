@@ -1,12 +1,6 @@
 import { withOrganizationScope } from './tenant-scope.middleware';
 
 describe('withOrganizationScope', () => {
-  const createMockClient = () => {
-    return {
-      $extends: jest.fn((config) => config),
-    };
-  };
-
   const createTenantContext = (organizationId?: string) => ({
     getOrganizationId: jest.fn(() => organizationId),
   });
@@ -24,13 +18,10 @@ describe('withOrganizationScope', () => {
     models?: string[];
     model?: string;
   }) => {
-    const client = createMockClient();
     const tenantContext = createTenantContext(organizationId);
-    const extended = withOrganizationScope(
-      client as any,
-      tenantContext as any,
-      { models },
-    ) as any;
+    const extended = withOrganizationScope(tenantContext as any, {
+      models,
+    }) as any;
 
     const handler = extended.query.$allModels.$allOperations;
     const query = jest.fn((nextArgs) => Promise.resolve(nextArgs));

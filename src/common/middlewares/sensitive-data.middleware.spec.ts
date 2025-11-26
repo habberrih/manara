@@ -2,10 +2,7 @@ import { withSensitiveRedaction } from './sensitive-data.middleware';
 
 describe('withSensitiveRedaction', () => {
   const createExtended = () => {
-    const client = {
-      $extends: jest.fn((config) => config),
-    };
-    return withSensitiveRedaction(client as any) as any;
+    return withSensitiveRedaction() as any;
   };
 
   it('strips sensitive fields from user results', async () => {
